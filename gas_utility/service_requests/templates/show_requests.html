@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Service Requests</title>
+</head>
+<body>
+    <a href="{% url 'login' %}">Logout</a>&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'home' %}">Home</a>
+    <ul>
+        {% if user.is_superuser %}
+            {% for request in service_requests %}
+                <li>
+                    <a href="{% url 'service_request_detail' request.pk %}">
+                        Request ID: {{ request.id }} - Type: {{ request.get_request_type_display }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>No service requests found.</li>
+            {% endfor %}
+        {% else %}
+            {% for request in user.service_requests.all %}
+                <li>
+                    <a href="{% url 'service_request_detail' request.pk %}">
+                        Request ID: {{ request.id }} - Type: {{ request.get_request_type_display }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>No service requests found.</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</body>
+</html>

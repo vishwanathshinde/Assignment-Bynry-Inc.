@@ -1,0 +1,17 @@
+<!-- submit_request.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Service Request</title>
+</head>
+<body>
+    <a href="{% url 'login' %}">Logout</a>&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'home' %}">Home</a>
+    <h1>Submit Service Request</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
